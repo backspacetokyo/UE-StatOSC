@@ -50,14 +50,16 @@ void UStatOSCSubsystem::Tick(float DeltaTime)
 
 		AddStatMessage(ComputerName, FString::Format(TEXT("GPUFrameTime{0}"), {GPUIndex}), GPUFrameTime, Bundle);
 	}
+	
+	AddStatMessage(ComputerName, TEXT("ScreenPercentage"), Scalability::GetResolutionScreenPercentage(), Bundle);
+	AddStatMessage(ComputerName, TEXT("QualityLevel"), Scalability::GetQualityLevels().GetSingleQualityLevel(), Bundle);
 
-	// if (GEngine && GEngine->GameViewport)
-	// {
-	// 	auto Size = GEngine->GameViewport->Viewport->GetSizeXY();
-	// 	AddStatMessage(ComputerName, TEXT("ViewportSizeX"), Size.X, Bundle);
-	// 	AddStatMessage(ComputerName, TEXT("ViewportSizeY"), Size.Y, Bundle);
-	// }
-
+	{
+		static IConsoleVariable* CVar = IConsoleManager::Get().FindConsoleVariable(TEXT("r.VSync"));
+		float vsync = CVar->GetFloat();
+		AddStatMessage(ComputerName, TEXT("VSync"), vsync, Bundle);
+	}
+	
 	AddStatMessage(ComputerName, TEXT("SystemResolutionX"), GSystemResolution.ResX, Bundle);
 	AddStatMessage(ComputerName, TEXT("SystemResolutionY"), GSystemResolution.ResY, Bundle);
 
