@@ -15,10 +15,10 @@ class UStatOSCSubsystemSettings : public UObject
 
 public:
 
-	UPROPERTY(EditAnywhere, config, Category = OSCStat)
+	UPROPERTY(EditAnywhere, config, Category = OSCStat, meta=(ConfigRestartRequired=true))
 	FString OSCTargetHost = "127.0.0.1";
 
-	UPROPERTY(EditAnywhere, config, Category = OSCStat)
+	UPROPERTY(EditAnywhere, config, Category = OSCStat, meta=(ConfigRestartRequired=true))
 	int OSCTargetPort = 20000;
 };
 
